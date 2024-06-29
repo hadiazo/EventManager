@@ -20,7 +20,8 @@ public class EventRepository implements IEventRepository {
 
     @Override
     public int save(Event event) {
-        String sql = "INSERT INTO event VALUES (?, ?, ?, ?, ?)";
+        //String sql = "INSERT INTO event VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO event (title, description, date, place) VALUES (?, ?, ?, ?)";
         return jdbcTemplate.update(sql, new Object[]{event.getId(), event.getTitle(),
                 event.getDescription(), event.getDate(), event.getPlace()});
     }
