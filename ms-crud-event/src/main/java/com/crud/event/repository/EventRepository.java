@@ -3,9 +3,11 @@ package com.crud.event.repository;
 import com.crud.event.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class EventRepository implements IEventRepository {
     @Autowired
     private org.springframework.jdbc.core.JdbcTemplate jdbcTemplate;
