@@ -26,8 +26,10 @@ CREATE TABLE IF NOT EXISTS `eventdb`.`event` (
   `description` TEXT NOT NULL,
   `date` DATE NOT NULL,
   `place` VARCHAR(8) NOT NULL,
+  `status` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
