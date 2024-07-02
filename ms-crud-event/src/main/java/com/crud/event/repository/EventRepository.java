@@ -14,23 +14,23 @@ public class EventRepository implements IEventRepository {
 
     @Override
     public List<Event> findAll() {
-        String sql = "SELECT * FROM event";
+        String sql = "SELECT * FROM event WHERE status = 1";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Event.class));
     }
 
     @Override
     public int save(Event event) {
         //String sql = "INSERT INTO event VALUES (?, ?, ?, ?, ?)";
-        String sql = "INSERT INTO event (title, description, date, place) VALUES (?, ?, ?, ?)";
-        return jdbcTemplate.update(sql, new Object[]{event.getId(), event.getTitle(),
-                event.getDescription(), event.getDate(), event.getPlace()});
+        String sql = "INSERT INTO event (title, description, date, place, status) VALUES (?, ?, ?, ?, ?)";
+        return jdbcTemplate.update(sql, new Object[]{event.getTitle(),
+                event.getDescription(), event.getDate(), event.getPlace(), event.getStatus()});
     }
 
     @Override
     public int update(Event event) {
         String sql = "UPDATE event SET title = ?, description = ?, date = ?, place = ? WHERE id = ?";
-        return jdbcTemplate.update(sql, new Object[]{event.getId(), event.getTitle(),
-                event.getDescription(), event.getDate(), event.getPlace()});
+        return jdbcTemplate.update(sql, new Object[]{event.getTitle(), event.getDescription(),
+                event.getDate(), event.getPlace(), event.getId()});
     }
 
     @Override

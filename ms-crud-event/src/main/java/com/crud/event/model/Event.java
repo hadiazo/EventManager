@@ -9,4 +9,5 @@ public class Event {
     String description;
     String date;
     String place;
+    int status;
 }
