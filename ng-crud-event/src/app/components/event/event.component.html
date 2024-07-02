@@ -1,0 +1,72 @@
+<!-- <nav class="navbar bg-light"> -->
+<nav class="navbar" style="background-color: #198755;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img style="border-radius: 10px;" src="https://static-00.iconduck.com/assets.00/calendar-icon-1995x2048-tot17508.png"
+                alt="Logo" height="120px">
+        </a>
+        <div class="col-md-4">
+            <h1 style="color: white;">Event Manager</h1>
+        </div>
+        <!--img style="border-radius: 70px; background-color: rgb(226, 223, 223);"
+            src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png" width="115" height="100"-->
+    </div>
+</nav>
+
+<div class="col-md-12 p-2">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+            class="fa fa-save"></i>Agregar evento</button>
+    <table class="table mt-2 table-bordered">
+        <thead class="table-primary">
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Fecha</th>
+                <th>Lugar</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listCards">
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+
+                <td>
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" (click)="selectItem(item)">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    &nbsp;
+                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(item.id)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- TODO: Modals -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 *ngIf="!isUpdate" class="modal-title fs-5">Nuevo Evento</h1>
+                <h1 *ngIf="isUpdate" class="modal-title fs-5">Actualizar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="newEvent()"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+                <button *ngIf="!isUpdate" type="button" class="btn btn-success btn-sm" (click)="save()">Guardar</button>
+                <button *ngIf="isUpdate" type="button" class="btn btn-warning btn-sm" (click)="update()">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
