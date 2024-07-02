@@ -14,7 +14,7 @@ public class EventRepository implements IEventRepository {
 
     @Override
     public List<Event> findAll() {
-        String sql = "SELECT * FROM event WHERE status = 1";
+        String sql = "SELECT * FROM event WHERE status = 1 ORDER BY date ASC";
         return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Event.class));
     }
 
