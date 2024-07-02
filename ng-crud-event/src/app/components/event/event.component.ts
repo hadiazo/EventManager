@@ -38,7 +38,7 @@ export class EventComponent implements OnInit {
     });
   }
 
-save(){
+  save(){
     this.formEvent.controls['status'].setValue('1');
     this.eventService.saveEvent(this.formEvent.value).subscribe(resp=>{
       if(resp){
@@ -77,5 +77,6 @@ save(){
     this.formEvent.controls['description'].setValue(item.description);
     this.formEvent.controls['date'].setValue(item.date);
     this.formEvent.controls['place'].setValue(item.place);
-  }  
+  }
+
 }

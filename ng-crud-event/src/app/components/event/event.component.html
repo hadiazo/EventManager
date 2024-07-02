@@ -1,5 +1,5 @@
 <!-- <nav class="navbar bg-light"> -->
-<nav class="navbar" style="background-color: #198755;">
+<nav class="navbar" style="background-color: #000b4b;">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img style="border-radius: 10px;" src="https://static-00.iconduck.com/assets.00/calendar-icon-1995x2048-tot17508.png"
@@ -16,7 +16,7 @@
 </nav>
 
 <div class="col-md-12 p-2">
-    <table style="width:100%" class="table mt-2 table-bordered">
+    <table style="width:100%" class="table mt-2 table-striped table-hover">
         <thead class="table-primary">
             <tr>
                 <th>ID</th>
@@ -65,25 +65,33 @@
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Título</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="title">
+                            <input type="text" minlength="1" class="form-control" formControlName="title">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Descripción</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="description">
+                            <input type="text" minlength="1" class="form-control" formControlName="description">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Fecha</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="date">
+                            <!--input type="text" class="form-control" formControlName="date"-->
+                            <input type="date" id="calendar" class="form-control" placeholder="" formControlName="date">
+                            
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Lugar</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" formControlName="place">
+                            <!--input type="text" class="form-control" formControlName="place"-->
+                            <select class="form-control" formControlName="place">
+                                <option value="Salón A">Salón A</option>
+                                <option value="Salón B">Salón B</option>
+                                <option value="Salón C">Salón C</option>
+                                <option value="Salón D">Salón D</option>
+                            </select>
                         </div>
                     </div>
                 </form>
