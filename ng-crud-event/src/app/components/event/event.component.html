@@ -15,6 +15,10 @@
     </div>
 </nav>
 
+<script>
+
+</script>
+
 <div class="col-md-12 p-2">
     <table class="table mt-2 table-striped table-hover">
         <thead class="table-primary">
@@ -80,7 +84,7 @@
                         <label class="col-sm-2 col-form-label">Fecha</label>
                         <div class="col-sm-10">
                             <!--input type="text" class="form-control" formControlName="date"-->
-                            <input type="date" class="form-control" required formControlName="date">
+                            <input type="date" class="form-control" min="{{today}}" required formControlName="date">
                             
                         </div>
                     </div>
