@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { EventModel } from '../../model/eventModel';
 import { EventService } from '../../service/event.service';
 
@@ -15,6 +15,8 @@ export class EventComponent implements OnInit {
   listEvents: EventModel [] = [];
   formEvent: FormGroup = new FormGroup({});
   isUpdate: boolean = false;
+
+  today: string = new Date().toISOString().substring(0,10);
   
   constructor(private eventService: EventService) { }
 
@@ -22,12 +24,13 @@ export class EventComponent implements OnInit {
     this.list();
     this.formEvent =  new FormGroup({
       id: new FormControl(''),
-      title: new FormControl(''),
-      description: new FormControl(''),
-      date: new FormControl(''),
-      place: new FormControl(''),
+      title: new FormControl(null, Validators.compose([Validators.minLength(1), Validators.required])),
+      description: new FormControl(null, Validators.compose([Validators.minLength(1), Validators.required])),
+      date: new FormControl(null, [Validators.required]),
+      place: new FormControl(null, Validators.compose([Validators.minLength(1), Validators.required])),
       status: new FormControl('1')
     });
+    //this.setInitValidators();
   }
 
   list() {
@@ -38,28 +41,28 @@ export class EventComponent implements OnInit {
     });
   }
 
-  save(){
+  save() {
     this.formEvent.controls['status'].setValue('1');
     this.eventService.saveEvent(this.formEvent.value).subscribe(resp=>{
-      if(resp){
+      if(resp) {
         this.list();
         this.formEvent.reset();
       }
     });
   }
 
-  update(){
+  update() {
     this.eventService.updateEvent(this.formEvent.value).subscribe(resp=>{
-      if(resp){
+      if(resp) {
         this.list();
         this.formEvent.reset();
       }
     });
   }
 
-  delete(id: any){
+  delete(id: any) {
     this.eventService.deleteEvent(id).subscribe(resp=>{
-      if(resp){
+      if(resp) {
         this.list();
       }
     });
@@ -78,5 +81,12 @@ export class EventComponent implements OnInit {
     this.formEvent.controls['date'].setValue(item.date);
     this.formEvent.controls['place'].setValue(item.place);
   }
+
+  /*setInitValidators() {
+    this.formEvent.controls['title'].addValidators([Validators.required, Validators.minLength(1)]);
+    this.formEvent.controls['description'].addValidators([Validators.required, Validators.minLength(1)]);
+    this.formEvent.controls['date'].addValidators([Validators.required]);
+    this.formEvent.controls['place'].addValidators([Validators.required, Validators.minLength(1)]);
+  }*/
 
 }
