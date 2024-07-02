@@ -1,40 +1,81 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { CommonModule } from '@angular/common'
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EventModel } from '../../model/eventModel';
+import { EventService } from '../../service/event.service';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [],
+  imports: [ FormsModule, ReactiveFormsModule, CommonModule ],
   templateUrl: './event.component.html',
   styleUrl: './event.component.sass'
 })
 export class EventComponent implements OnInit {
+  listEvents: EventModel [] = [];
+  formEvent: FormGroup = new FormGroup({});
   isUpdate: boolean = false;
-  constructor() { 
-    
+  
+  constructor(private eventService: EventService) { }
+
+  ngOnInit(): void {
+    this.list();
+    this.formEvent =  new FormGroup({
+      id: new FormControl(''),
+      title: new FormControl(''),
+      description: new FormControl(''),
+      date: new FormControl(''),
+      place: new FormControl(''),
+      status: new FormControl('1')
+    });
   }
-  ngOnInit() {
-    console.log("event works!")
+
+  list() {
+    this.eventService.getEvents().subscribe(resp=>{
+      if(resp) {
+        this.listEvents = resp;
+      }
+    });
+  }
+
+save(){
+    this.formEvent.controls['status'].setValue('1');
+    this.eventService.saveEvent(this.formEvent.value).subscribe(resp=>{
+      if(resp){
+        this.list();
+        this.formEvent.reset();
+      }
+    });
+  }
+
+  update(){
+    this.eventService.updateEvent(this.formEvent.value).subscribe(resp=>{
+      if(resp){
+        this.list();
+        this.formEvent.reset();
+      }
+    });
+  }
+
+  delete(id: any){
+    this.eventService.deleteEvent(id).subscribe(resp=>{
+      if(resp){
+        this.list();
+      }
+    });
   }
 
   newEvent() {
-
-  }
-
-  save() {
-    
-  }
-
-  update() {
-    
-  }
-  
-  delete(id: any) {
-  
+    this.isUpdate = false;
+    this.formEvent.reset();
   }
 
   selectItem(item: any) {
-
-  }
-  
+    this.isUpdate = true;
+    this.formEvent.controls['id'].setValue(item.id);
+    this.formEvent.controls['title'].setValue(item.title);
+    this.formEvent.controls['description'].setValue(item.description);
+    this.formEvent.controls['date'].setValue(item.date);
+    this.formEvent.controls['place'].setValue(item.place);
+  }  
 }

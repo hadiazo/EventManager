@@ -24,24 +24,25 @@
                 <th>Descripción</th>
                 <th>Fecha</th>
                 <th>Lugar</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let item of listCards">
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
+            <tr *ngFor="let item of listEvents">
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.place}}</td>
 
                 <td>
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" (click)="selectItem(item)">
-                        <i class="fa fa-pencil"></i>
+                        <!--i class="fa fa-pencil"></i--> Editar
                     </button>
                     &nbsp;
                     <button type="button" class="btn btn-danger btn-sm" (click)="delete(item.id)">
-                        <i class="fa fa-trash"></i>
+                        <!--i class="fa fa-trash"></i--> Eliminar
                     </button>
                 </td>
             </tr>
@@ -60,7 +61,32 @@
                     (click)="newEvent()"></button>
             </div>
             <div class="modal-body">
-                
+                <form [formGroup]="formEvent">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" formControlName="title">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Description</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" formControlName="description">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" formControlName="date">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Place</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" formControlName="place">
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
